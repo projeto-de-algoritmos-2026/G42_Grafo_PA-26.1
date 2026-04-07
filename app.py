@@ -11,7 +11,7 @@ def home():
 # Onde o grafo eh carregado para o fetch do js
 @app.route("/grafo", methods=["GET","POST"])
 def get_grafo():
-    grafo=carregar_grafo
+    grafo=carregar_grafo()
     if request.method =="POST":
         grafo=request.get_json()
         salvar_grafo(grafo)

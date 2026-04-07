@@ -5,7 +5,7 @@ def carregar_grafo():
         return json.load(f)
     
 def salvar_grafo(grafo):
-    with open('data/grafos.json', 'w') as f:
+    with open('data/grafo.json', 'w') as f:
         json.dump(grafo, f, indent=4)
 
 # o json esta em listas feitas para o vis renderizar o grafo, nessa funcao traduzimos elas para dicionarios
