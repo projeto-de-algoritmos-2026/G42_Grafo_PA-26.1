@@ -28,5 +28,30 @@ function iniciarGrafo(visGrafo) {
     network = new vis.Network(container, data, options);
 }
 
+// adiciona
+function adicionarNo(id, nome) {
+    nodes.add({ id, nomme });
+    grafo01.nodes.push({ id, nome });
+}
+
+
+// diciona aresta
+function adicionarAresta(from, to) {
+    const aresta = { from, to };
+    edges.add(aresta);
+    grafo01.edges.push(aresta);
+}
+
+// manda salvar
+async function salvarGrafo() {
+    const res = await fetch("/grafo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(grafo01)
+    });
+
+    const resultado = await res.json();
+    console.log("Resposta do servidor:", resultado);
+}
 
 init();
