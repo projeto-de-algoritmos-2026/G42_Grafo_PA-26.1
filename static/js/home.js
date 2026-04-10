@@ -1,10 +1,13 @@
 let grafo01;
 let nodes, edges, network;
+let ordem;
 
 let botaoNo = document.getElementById("btn-no")
 let botaoAresta = document.getElementById("btn-aresta")
 let botaoDelNo = document.getElementById("btn-del-no")
 let botaoDelAresta = document.getElementById("btn-del-aresta")
+let botaoOrdemTop = document.getElementById("btn-ordem")
+let botaoDeBfs=document.getElementById("btn-bfs")
 
 
 botaoDelNo.addEventListener('click', () => {
@@ -31,6 +34,19 @@ botaoAresta.addEventListener('click', () => {
     adicionarAresta(origemAresta.value, destinoAresta.value)
 })
 
+// botaoDeBfs.addEventListener('click', async ()=>{
+//     let noInicio=document.getElementById("btn-bfs");
+//     console.log(noInicio);
+//     const res= await fetch("/bfs")
+// })
+
+botaoOrdemTop.addEventListener('click', async () =>{
+    const res= await fetch("/ordem_top")
+    ordem= await res.json();
+    console.log("ordem: ",ordem);
+    animar(ordem)
+})
+
 function atualizarListaNos() {
     const dataList = document.getElementById("lista-nos");
     dataList.innerHTML = "";
@@ -46,12 +62,14 @@ async function init() {
     await carregarGrafo();
     iniciarGrafo(grafo01);
     atualizarListaNos();
+    
 }
 
 async function carregarGrafo() {
     const res = await fetch("/grafo");
     grafo01 = await res.json();
     console.log("Grafo carregado", grafo01);
+    
 }
 
 function iniciarGrafo(visGrafo) {
@@ -151,6 +169,31 @@ async function salvarGrafo() {
 
     const resultado = await res.json();
     console.log("Grafo salvo,Resposta do servidor:", resultado);
+}
+
+function animar(ordem) {
+    if(ordem.erro){
+        alert("errooooo");
+        console.log("erro");
+        return;
+    }
+    let i = 0;
+
+    function passo() {
+        if (i >= ordem.length) return;
+
+        const noAtual = ordem[i];
+
+        nodes.update({
+        id: noAtual,
+        color: { background: 'red' }
+        });
+
+        i++;
+        setTimeout(passo, 800);
+    }
+
+    passo();
 }
 
 init();

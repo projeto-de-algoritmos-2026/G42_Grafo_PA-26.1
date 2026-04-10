@@ -4,9 +4,14 @@ def carregar_grafo():
     with open('data/grafo.json', 'r') as f:
         return json.load(f)
     
+    
 def salvar_grafo(grafo):
     with open('data/grafo.json', 'w') as f:
         json.dump(grafo, f, indent=4)
+
+def salvar_ordem(ordem):
+    with open('data/ordem_top.json', 'w') as o:
+        json.dump(ordem, o, indent=4)
 
 # o json esta em listas feitas para o vis renderizar o grafo, nessa funcao traduzimos elas para dicionarios
 def converte_json(data):
@@ -102,4 +107,5 @@ def ordenacao_topologica(grafo):
 grafo=converte_json(data)
 ##print(grafo)
 ordem_top=ordenacao_topologica(grafo)
+# salvar_ordem(ordem_top)
 ##print(ordem_top)
