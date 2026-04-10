@@ -7,18 +7,20 @@ let botaoAresta = document.getElementById("btn-aresta")
 let botaoDelNo = document.getElementById("btn-del-no")
 let botaoDelAresta = document.getElementById("btn-del-aresta")
 let botaoOrdemTop = document.getElementById("btn-ordem")
-let botaoDeBfs=document.getElementById("btn-bfs")
+let botaoDeBfs = document.getElementById("btn-bfs")
+let botaoDeBfsClear = document.getElementById("btn-bfs-clear")
 let noSelecionado = botaoDeBfs.value
+
 
 botaoDelNo.addEventListener('click', () => {
     let nomeNo = document.getElementById("Del-No").value;
     removerNo(nomeNo)
 })
 
-botaoDelAresta.addEventListener('click',()=>{
+botaoDelAresta.addEventListener('click', () => {
     let from = document.getElementById("Del-Aresta-o").value;
     let to = document.getElementById("Del-Aresta-d").value;
-    removerAresta(from,to);
+    removerAresta(from, to);
 
 })
 
@@ -34,36 +36,38 @@ botaoAresta.addEventListener('click', () => {
     adicionarAresta(origemAresta.value, destinoAresta.value)
 })
 
-botaoDeBfs.addEventListener('click', async ()=>{
-    let noInicio=document.getElementById("NoInicio").value;
-    if(!noInicio){
+botaoDeBfs.addEventListener('click', async () => {
+    let noInicio = document.getElementById("NoInicio").value;
+    if (!noInicio) {
         alert("Digite um no")
         return
     }
-    const res=await fetch("/bfs",{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
+    const res = await fetch("/bfs", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            inicio : noInicio
+            inicio: noInicio
         })
     })
-    const data= await res.json()
-    if(data.erro){
+    const data = await res.json()
+    const copia = data
+    if (data.erro) {
         alert("Erroooo")
     }
-    else{
+    else {
         console.log(data)
-        animar(data)
+        await animarB(data)
+
     }
-    
+
 })
 
-botaoOrdemTop.addEventListener('click', async () =>{
-    const res= await fetch("/ordem_top")
-    ordem= await res.json();
-    console.log("ordem: ",ordem);
+botaoOrdemTop.addEventListener('click', async () => {
+    const res = await fetch("/ordem_top")
+    ordem = await res.json();
+    console.log("ordem: ", ordem);
     animar(ordem)
 })
 
@@ -82,14 +86,14 @@ async function init() {
     await carregarGrafo();
     iniciarGrafo(grafo01);
     atualizarListaNos();
-    
+
 }
 
 async function carregarGrafo() {
     const res = await fetch("/grafo");
     grafo01 = await res.json();
     console.log("Grafo carregado", grafo01);
-    
+
 }
 
 function iniciarGrafo(visGrafo) {
@@ -159,7 +163,7 @@ function adicionarAresta(from, to) {
     salvarGrafo()
 }
 
-function removerAresta(from,to){
+function removerAresta(from, to) {
     // remove do vis.js
     const arestasParaRemover = edges.get().filter(a => // separa as que sao as removiveis 
         a.from === from && a.to === to
@@ -168,14 +172,14 @@ function removerAresta(from,to){
     edges.remove(arestasParaRemover);
 
     // remove do grefete
-    grafo01.edges = grafo01.edges.filter(a => 
+    grafo01.edges = grafo01.edges.filter(a =>
         !(a.from === from && a.to === to)
     );
 
     console.log(`aresta ${from} -> ${to} removida`);
 
     salvarGrafo();
-    
+
 
 }
 
@@ -191,28 +195,61 @@ async function salvarGrafo() {
     console.log("Grafo salvo,Resposta do servidor:", resultado);
 }
 
-function animar(ordem) {
-    if(ordem.erro){
-        alert("errooooo");
-        console.log("erro");
-        return;
-    }
+function resetarAnimacao(ordem) {
     let i = 0;
-
     function passo() {
         if (i >= ordem.length) return;
         const noAtual = ordem[i];
 
         nodes.update({
-        id: noAtual,
-        color: { background: 'red' }
+            id: noAtual,
+            color: { background: '#fffccd' }
         });
 
         i++;
         setTimeout(passo, 800);
     }
 
-    passo();
+    passo()
+
+}
+function animar(ordem) {
+
+    if (ordem.erro) {
+        alert("errooooo");
+        console.log("erro");
+        return;
+    }
+    let i = 0;
+
+    return new Promise((resolve) => {
+        function passo() {
+            if (i >= ordem.length) {
+                resolve();
+                return;
+            }
+            const noAtual = ordem[i];
+
+            nodes.update({
+                id: noAtual,
+                color: { background: 'red' }
+            });
+
+            i++;
+            setTimeout(passo, 800);
+        }
+        passo();
+    })
+
+
+}
+
+
+// recebe uma lista -> json
+async function animarB(ordem) {
+    await animar(ordem)
+    await new Promise(resolve=> setTimeout(resolve,2000))// espero dois segundos pra desanimar 
+    resetarAnimacao(ordem)
 }
 
 init();

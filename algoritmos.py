@@ -58,6 +58,7 @@ def cria_grafo(n):
 def adiciona_aresta(inicio,destino,grafo):
     grafo[inicio].append(destino)
 
+# retorna uma lista
 def BFS(grafo, inicio):
     visitado={no: False for no in grafo}
     fila=Fila()
