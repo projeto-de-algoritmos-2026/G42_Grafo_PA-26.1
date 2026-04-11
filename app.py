@@ -1,5 +1,5 @@
 from flask import Flask,request,jsonify,render_template 
-from algoritmos import carregar_grafo,salvar_grafo,ordenacao_topologica,converte_json,BFS
+from algoritmos import carregar_grafo,salvar_grafo,ordenacao_topologica,converte_json,BFS,carregar_grafo2
 
 app= Flask("__name__")
 
@@ -11,11 +11,18 @@ def home():
 # Onde o grafo eh carregado para o fetch do js
 @app.route("/grafo", methods=["GET","POST"])
 def get_grafo():
-    grafo=carregar_grafo()
+    grafo=carregar_grafo2()
     if request.method =="POST":
         grafo=request.get_json()
         salvar_grafo(grafo)
         return jsonify({"status": "ok"})
+    return jsonify(grafo)
+
+@app.route("/grafo2", methods=["GET", "POST"])
+def get_grafo2():
+    grafo=carregar_grafo2()
+    if request.method == "POST":
+        return
     return jsonify(grafo)
 
 @app.route("/ordem_top")

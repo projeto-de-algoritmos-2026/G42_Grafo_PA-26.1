@@ -92,7 +92,7 @@ function atualizaOT(ordem) {
 
     setTimeout(() => {
         network.setOptions({ physics: false })
-    }, 1500)
+    }, 0)
 }
 
 function atualizarListaNos() {

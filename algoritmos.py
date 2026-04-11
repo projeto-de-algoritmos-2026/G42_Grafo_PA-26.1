@@ -3,7 +3,10 @@ import json
 def carregar_grafo():
     with open('data/grafo.json', 'r') as f:
         return json.load(f)
-    
+
+def carregar_grafo2():
+    with open('data/grafo2.json', 'r') as f:
+        return json.load(f)
     
 def salvar_grafo(grafo):
     with open('data/grafo.json', 'w') as f:
