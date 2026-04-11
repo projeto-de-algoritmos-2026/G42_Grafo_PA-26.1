@@ -38,7 +38,6 @@
     {"from":"deploy producao","id":"e36","to":"monitoramento"},
     {"from":"monitoramento","id":"e37","to":"coletar feedback"},
     {"from":"coletar feedback","id":"e38","to":"planejar melhorias"},
-    {"from":"planejar melhorias","id":"e39","to":"planejar sprints"},
     {"from":"planejar sprints","id":"e40","to":"implementar backend"},
     {"from":"planejar sprints","id":"e41","to":"implementar frontend"},
     {"from":"testes finais","id":"e42","to":"documentar sistema"},

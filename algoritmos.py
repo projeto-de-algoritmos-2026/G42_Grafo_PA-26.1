@@ -1,19 +1,23 @@
 import json
 
-def carregar_grafo():
-    with open('data/grafo.json', 'r') as f:
+def carregar_grafo(nome):
+    with open('data/grafo'+nome+'.json','r') as f:
         return json.load(f)
+
+# def carregar_grafo():
+#     with open('data/grafo.json', 'r') as f:
+#         return json.load(f)
 
 def carregar_grafo2():
     with open('data/grafo2.json', 'r') as f:
         return json.load(f)
     
-def salvar_grafo(grafo):
-    with open('data/grafo.json', 'w') as f:
+def salvar_grafo(grafo,nome):
+    with open('data/grafo/'+nome+'.json', 'w') as f:
         json.dump(grafo, f, indent=4)
 
-def salvar_ordem(ordem):
-    with open('data/ordem_top.json', 'w') as o:
+def salvar_ordem(ordem,nome):
+    with open('data/ordem_top/'+nome+'.json', 'w') as o:
         json.dump(ordem, o, indent=4)
 
 # o json esta em listas feitas para o vis renderizar o grafo, nessa funcao traduzimos elas para dicionarios
@@ -29,9 +33,7 @@ def converte_json(data):
     return grafo
 
 
-# PARA TESTES:to lendo o arquivo json feito para js e depois convertendo para um q o python entende
-with open('data/grafo.json') as f:
-    data=json.load(f)
+
 
 # Funções para os algoritmos de busca
 class Fila():
@@ -108,8 +110,3 @@ def ordenacao_topologica(grafo):
     else: 
         return ordem_topologica
 
-grafo=converte_json(data)
-##print(grafo)
-ordem_top=ordenacao_topologica(grafo)
-# salvar_ordem(ordem_top)
-##print(ordem_top)

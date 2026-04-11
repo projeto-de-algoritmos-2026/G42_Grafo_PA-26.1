@@ -11,7 +11,6 @@ let botaoDeBfs = document.getElementById("btn-bfs")
 let botaoDeBfsClear = document.getElementById("btn-bfs-clear")
 let noSelecionado = botaoDeBfs.value
 
-
 botaoDelNo.addEventListener('click', () => {
     let nomeNo = document.getElementById("Del-No").value;
     removerNo(nomeNo)
@@ -42,7 +41,7 @@ botaoDeBfs.addEventListener('click', async () => {
         alert("Digite um no")
         return
     }
-    const res = await fetch("/bfs", {
+    const res = await fetch(`/bfs/${nomeGrafo}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -65,7 +64,7 @@ botaoDeBfs.addEventListener('click', async () => {
 })
 
 botaoOrdemTop.addEventListener('click', async () => {
-    const res = await fetch("/ordem_top")
+    const res = await fetch(`/ordem_top/${nomeGrafo}`)
     ordem = await res.json();
     if (ordem.erro) {
         alert('grafo tem ciclo')
@@ -114,7 +113,7 @@ async function init() {
 }
 
 async function carregarGrafo() {
-    const res = await fetch("/grafo");
+    const res = await fetch(`/grafo/${nomeGrafo}`);
     grafo01 = await res.json();
     console.log("Grafo carregado", grafo01);
 
@@ -225,7 +224,7 @@ function removerAresta(from, to) {
 
 // manda salvar
 async function salvarGrafo() {
-    const res = await fetch("/grafo", {
+    const res = await fetch(`/grafo/${nomeGrafo}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(grafo01)
