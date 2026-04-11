@@ -67,9 +67,19 @@ botaoOrdemTop.addEventListener('click', async () => {
 })
 
 function atualizaOT(ordem) {
-    network.setOptions({ physics: true })
+    network.setOptions({
+        physics: false,
+        edges: {
+            smooth: {
+                enabled: true,
+                type: 'curvedCW',
+                roundness: 0.4
+            }
+        }
+    })
+
     ordem.forEach((no, index) => {
-        nodes.update({ id: no, x: index * 150, y: 0, fixed: true })
+        nodes.update({ id: no, x: index * 220, y:0, fixed: true })
     })
     setTimeout(() => { network.setOptions({ physics: false }) }, 0)
 }
@@ -166,14 +176,14 @@ function iniciarGrafo(visGrafo) {
 
         physics: {
             enabled: true,
-            stabilization: { iterations: 200 },
+            stabilization: { iterations: 300 },
             barnesHut: {
                 gravitationalConstant: -5000,
                 centralGravity: 0.3,
-                springLength: 150,
-                springConstant: 0.02,
-                damping: 0.2,
-                avoidOverlap:2
+                springLength: 120,
+                springConstant: 0.04,
+                damping: 0.15,
+                avoidOverlap: 1
 
             }
         }
@@ -227,6 +237,8 @@ async function salvarGrafo() {
 
 function resetarAnimacao(ordem) {
     return new Promise((resolve) => {
+
+
         let i = 0;
         function passo() {
             if (i >= ordem.length) { resolve(); return; }
@@ -238,7 +250,7 @@ function resetarAnimacao(ordem) {
                 }
             });
             i++;
-            setTimeout(passo, 600);
+            setTimeout(passo, 1);
         }
         passo()
     })
@@ -258,7 +270,7 @@ function animar(ordem) {
                 }
             });
             i++;
-            setTimeout(passo, 800);
+            setTimeout(passo, 100);
         }
         passo();
     })
