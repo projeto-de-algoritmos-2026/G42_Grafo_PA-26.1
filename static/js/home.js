@@ -103,8 +103,8 @@ async function aplicarSubgrafoBFS(raiz, nosVisitados) {
         porNivel[nivel].push(no)
     }
 
-    const yGap = 150
-    const xGap = 180
+    const yGap = 120
+    const xGap = 400
     const movimentos = []
 
     for (const [nivel, nos] of Object.entries(porNivel)) {
@@ -126,28 +126,8 @@ async function aplicarSubgrafoBFS(raiz, nosVisitados) {
 async function restaurarGrafo() {
     if (!posicoesAntes) return
 
-    network.setOptions({ physics: { enabled: false } })
-
-    nodes.update(grafo01.nodes.map(n => ({ id: n.id, hidden: false })))
-    edges.update(grafo01.edges.map(a => ({ id: a.id, hidden: false })))
-
-    network.setOptions({
-        edges: {
-            smooth: { enabled: true, type: "dynamic", roundness: 0.5 }
-        }
-    })
-
-    const movimentos = grafo01.nodes.map(n => ({
-        id: n.id,
-        xFim: posicoesAntes[n.id].x,
-        yFim: posicoesAntes[n.id].y
-    }))
-
-    await moverNo(movimentos, 900)
-
-    // libera fixed e religa fisica
-    nodes.update(grafo01.nodes.map(n => ({ id: n.id, fixed: false })))
-    network.setOptions({ physics: { enabled: true } })
+    await carregarGrafo()
+    iniciarGrafo(grafo01)
 
     posicoesAntes = null
     botaoRestaurar.style.display = "none"
@@ -268,7 +248,7 @@ async function atualizaOT(ordem) {
         }
     })
 
-    const xGap = 220
+    const xGap = 450
     const duracao = 4000
 
     const movimentos = ordem.map((no, index) => ({ id: no, xFim: index * xGap, yFim: 0 }))
@@ -363,24 +343,30 @@ function iniciarGrafo(visGrafo) {
             stabilization: {
                 enabled: true,
                 iterations: 1000,
-                updateInterval: 500,
+                //updateInterval: 500,
                 fit: true
             },
             barnesHut: {
-                gravitationalConstant: -2000,
-                centralGravity: 0.3,
-                springLength: 120,
-                springConstant: 0.04,
-                damping: 0.6,
-                avoidOverlap: 0.85
+                gravitationalConstant: -4000,
+                centralGravity: 0.1,
+                springLength: 300,
+                springConstant: 0.02,
+                damping: 0.9,
+                avoidOverlap: 1
             }
         }
     };
 
     network = new vis.Network(container, data, options);
 
-
+    setTimeout(() => {
+        network.setOptions({ physics: { enabled: false } })
+        network.fit({ animation: { duration: 600, easingFunction: "easeInOutQuad" } })
+    }, 1500)
 }
+
+
+
 
 function adicionarNo(id, label) {
     nodes.add({ id, label });
