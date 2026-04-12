@@ -23,15 +23,16 @@
         <fieldset>
           <legend>Nó</legend>
           <input type="text" id="novoNo" placeholder="Nome do nó">
-          <button id="btn-no">Adicionar Tarefa</button>
+          <button id="btn-no">Adicionar nó</button>
           <input type="text" id="Del-No" placeholder="Nome do nó" list="lista-nos">
-          <button id="btn-del-no">Remover Tarefa</button>
+          <button id="btn-del-no">Remover nó</button>
         </fieldset>
 
         <fieldset>
           <legend>BFS</legend>
           <input type="text" id="NoInicio" placeholder="Nó de início" list="lista-nos">
-          <button id="btn-bfs">Iniciar BFS em tarefas</button>
+          <button id="btn-bfs">Iniciar BFS</button>
+          <button id="btn-restaurar" style="display: none;">Restaurar grafo</button>
         </fieldset>
       </div>
 
@@ -39,15 +40,15 @@
         <legend>Aresta</legend>
         <input type="text" id="Aresta-o" placeholder="Origem" list="lista-nos">
         <input type="text" id="Aresta-d" placeholder="Destino" list="lista-nos">
-        <button id="btn-aresta">Adicionar dependencia de tarefas</button>
+        <button id="btn-aresta">Adicionar aresta</button>
         <input type="text" id="Del-Aresta-o" placeholder="Origem" list="lista-nos">
         <input type="text" id="Del-Aresta-d" placeholder="Destino" list="lista-nos">
-        <button id="btn-del-aresta">Remover dependencias de tarefas</button>
+        <button id="btn-del-aresta">Remover aresta</button>
       </fieldset>
 
       <datalist id="lista-nos"></datalist>
 
-      <button id="btn-ordem">Ver fluxo de tarefas (O.T)</button>
+      <button id="btn-ordem">Ordenação top</button>
 
     </div>
 
