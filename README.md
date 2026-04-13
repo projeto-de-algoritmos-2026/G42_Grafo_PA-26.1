@@ -6,27 +6,9 @@ Repositorio do trabalho do Modulo 1, Grafo, Da disciplina de Projeto de Algoritm
 
 - Fazer os diferentes grafos
 - terminar de preencher o readme
-~~- e os grafos em si -> so fiz mais um~~
-- fazer uma especie de introdução pra nossa ideia.
-
-!! Atenção: Renomeie o seu repositório para (Tema)_(NomeDoProjeto). !! 
-
-Temas:
-
-- Grafos1
-- Grafos2
-- PD
-- D&C
-- Greed
-- Final
-
-!! Não coloque os nomes dos alunos no título do repositório. Exemplo de título correto: Grafos2_Labirinto-do-Minotauro !!
-
-(Apague essa seção)
 
 # Organizador de fluxos
 
-Número da Lista: X<br>
 Conteúdo da Disciplina: Grafos - Ordem Topologica e BFS<br>
 
 ## Alunos
@@ -42,7 +24,14 @@ Conteúdo da Disciplina: Grafos - Ordem Topologica e BFS<br>
 
 ## Screenshots
 
-Adicione 3 ou mais screenshots do projeto em funcionamento.
+- imagem do grafo normal
+![imagem do grafo normal](./static/img/grafo.png)
+
+- imagem da Ordenação topologica
+![imagem da Ordenação topologica](./static/img/OT.png)
+
+- imagem da arvore BFS
+![imagem de arvore BFS](./static/img/BFS.png)
 
 ## Instalação
 

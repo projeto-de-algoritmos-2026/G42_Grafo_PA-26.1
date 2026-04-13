@@ -1,0 +1,36 @@
+{
+    "edges": [
+        { "from": "separar ingredientes", "id": "1", "to": "preaquecer forno" },
+        { "from": "separar ingredientes", "id": "2", "to": "untar forma" },
+        { "from": "preaquecer forno", "id": "3", "to": "misturar secos" },
+        { "from": "misturar secos", "id": "4", "to": "adicionar liquidos" },
+        { "from": "adicionar liquidos", "id": "5", "to": "misturar massa" },
+        { "from": "misturar massa", "id": "6", "to": "despejar na forma" },
+        { "from": "untar forma", "id": "7", "to": "despejar na forma" },
+        { "from": "despejar na forma", "id": "8", "to": "levar ao forno" },
+        { "from": "levar ao forno", "id": "9", "to": "assar bolo" },
+        { "from": "assar bolo", "id": "10", "to": "verificar ponto" },
+        { "from": "verificar ponto", "id": "11", "to": "retirar do forno" },
+        { "from": "retirar do forno", "id": "12", "to": "deixar esfriar" },
+        { "from": "deixar esfriar", "id": "13", "to": "preparar cobertura" },
+        { "from": "preparar cobertura", "id": "14", "to": "aplicar cobertura" },
+        { "from": "aplicar cobertura", "id": "15", "to": "servir" }
+    ],
+    "nodes": [
+        { "id": "separar ingredientes", "label": "separar ingredientes" },
+        { "id": "preaquecer forno", "label": "preaquecer forno" },
+        { "id": "untar forma", "label": "untar forma" },
+        { "id": "misturar secos", "label": "misturar secos" },
+        { "id": "adicionar liquidos", "label": "adicionar liquidos" },
+        { "id": "misturar massa", "label": "misturar massa" },
+        { "id": "despejar na forma", "label": "despejar na forma" },
+        { "id": "levar ao forno", "label": "levar ao forno" },
+        { "id": "assar bolo", "label": "assar bolo" },
+        { "id": "verificar ponto", "label": "verificar ponto" },
+        { "id": "retirar do forno", "label": "retirar do forno" },
+        { "id": "deixar esfriar", "label": "deixar esfriar" },
+        { "id": "preparar cobertura", "label": "preparar cobertura" },
+        { "id": "aplicar cobertura", "label": "aplicar cobertura" },
+        { "id": "servir", "label": "servir" }
+    ]
+}
